@@ -1,0 +1,11 @@
+export default function MarketingHome() {
+  return (
+    <section className="space-y-2">
+      <h1 className="text-2xl font-bold text-pinkBrand">Marketing Landing</h1>
+      <p className="text-zinc-700">
+        This lives at <strong>/marketing</strong> (group name is ignored in the URL).
+      </p>
+      <a href="/" className="underline">Back to site</a>
+    </section>
+  );
+}
