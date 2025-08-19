@@ -1,12 +1,11 @@
 @import "tailwindcss";
 
-/* Tailwind v4 tokens */
+/* tailwind v4 tokens */
 @theme {
-  --color-indigoBrand: #2f295c; /* main */
-  --color-aquaBrand:   #30d5d1; /* secondary */
-  --color-pinkBrand:   #ec326c; /* accent */
+  --color-indigoBrand: #2f295c;
+  --color-aquaBrand:   #30d5d1;
+  --color-pinkBrand:   #ec326c;
 }
 
-/* tiny base styles so we can see something */
-html, body { height: 100%; }
-body { background: white; color: #0a0a0a; }
+/* font helpers */
+code, pre, kbd, samp { font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }

@@ -1,6 +1,6 @@
 const profile = {
   name: "Diler Bharam",
-  tagline: "Next.js-focused developer building clean, fast web apps and AI-powered products.",
+  tagline: "Front end/backend developer with Next.js and Nodejs building clean, fast web apps and AI-powered products.",
   location: "UK",
   email: "di.bharam@gmail.com",
   // mask your phone on the public site if you like:
@@ -8,14 +8,15 @@ const profile = {
   links: {
     linkedin: "https://linkedin.com/in/dilerbharam",
     github: "https://github.com/dibharam",
-    portfolio: "https://mscott-portfolio.vercel.app/",
+    tiktok: "https://www.tiktok.com/@di.bhar",
+    instagram: "https://www.instagram.com/di.bhar7/",
   },
   bio: `
 I’m a software developer specializing in React/Next.js on the frontend and Node.js/FastAPI on the backend. 
 I care about clarity, accessibility, and performance, and I enjoy turning fuzzy ideas into shippable, tested features. 
-Most recently I contributed to HomePointr, an AI-powered PropTech platform tackling trust and fraud in diaspora real-estate, 
+Most recently I contributed with DataKirk to HomePointr, an AI-powered PropTech platform tackling trust and fraud in diaspora real-estate, 
 helping onboard a 15+ dev team and attracting 2,100+ waitlist signups. I like building end-to-end: from clean UI and data 
-flows to secure APIs and PostgreSQL schemas — and experimenting with GPT models to automate due diligence and risk assessment.
+flows to secure APIs and PostgreSQL schemas, and experimenting with GPT models to automate due diligence and risk assessment.
   `.trim(),
   education: [
     {

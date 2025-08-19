@@ -9,7 +9,7 @@ const projects = [
     highlights: [
       "Onboarded 15+ developers; helped attract 2,100+ waitlist sign-ups",
       "Frontend in React/Next.js for investment dashboard UX",
-      "Backend in Node.js & FastAPI with PostgreSQL",
+      "Backend in Node.js & Prisma with PostgreSQL",
       "Blockchain-backed Smart Escrow on Polygon; GPT-4o-driven risk checks",
     ],
     tech: ["Next.js", "React", "Node.js", "FastAPI", "PostgreSQL", "Polygon", "OpenAI"],
@@ -21,8 +21,8 @@ const projects = [
     cover: "/images/projects/homepointr-cover.jpg",
   },
   {
-    slug: "kaiserai",
-    title: "KaiserAI",
+    slug: "strideai",
+    title: "StrideAI",
     year: 2025,
     role: "Full-Stack Developer",
     summary:
@@ -44,7 +44,10 @@ const projects = [
       "Python chess engine with rules, board representation, and Minimax-based AI; iterated via testing and debugging.",
     highlights: ["Move rules + validations", "Minimax for decision making"],
     tech: ["Python"],
-    links: { repo: null, live: null },
+    links: { 
+      repo: "https://github.com/dibharam/Chess-AI-python",
+      live: null
+     },
     cover: "/images/projects/chess-bot-cover.jpg",
   },
   {
@@ -60,7 +63,9 @@ const projects = [
       "Responsive UI",
     ],
     tech: ["JavaScript", "Chart.js", "Firebase", "CSS"],
-    links: { repo: null, live: null },
+    links: { repo: "https://github.com/dibharam/expense-visualiser", 
+      live: null 
+    },
     cover: "/images/projects/expenses-cover.jpg",
   },
 ];
