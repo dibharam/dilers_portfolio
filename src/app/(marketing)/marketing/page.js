@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function MarketingHome() {
   return (
     <section className="space-y-2">
