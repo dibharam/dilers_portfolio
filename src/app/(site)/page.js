@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import profile from "@/data/profile";
 
 export const metadata = { title: `Home — ${profile.name}`, description: profile.tagline };
@@ -10,8 +11,8 @@ export default function HomePage() {
         <p className="mt-1 text-zinc-700">{profile.tagline}</p>
         <p className="mt-3 max-w-2xl text-zinc-700">{profile.bio}</p>
         <div className="mt-4 flex gap-3">
-          <a href="/projects" className="inline-block rounded-xl px-4 py-2 bg-indigoBrand text-white">View projects</a>
-          <a href="/contact" className="inline-block rounded-xl px-4 py-2 border">Contact</a>
+          <Link href="/projects" className="inline-block rounded-xl px-4 py-2 bg-indigoBrand text-white">View projects</Link>
+          <Link href="/contact" className="inline-block rounded-xl px-4 py-2 border">Contact</Link>
         </div>
       </div>
     </section>

@@ -5,7 +5,7 @@ export default function MarketingHome() {
       <p className="text-zinc-700">
         This lives at <strong>/marketing</strong> (group name is ignored in the URL).
       </p>
-      <a href="/" className="underline">Back to site</a>
+      <Link href="/" className="underline">Back to site</Link>
     </section>
   );
 }

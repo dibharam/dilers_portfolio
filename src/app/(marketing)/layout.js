@@ -1,7 +1,11 @@
-export default function MarketingLayout({ children }) {
+import Link from "next/link";
+
+export default function MarketingHome() {
   return (
-    <div className="mx-auto max-w-4xl px-4 py-10 border-t">
-      {children}
-    </div>
+    <section className="space-y-2">
+      <h1 className="text-2xl font-bold text-pinkBrand">Marketing Landing</h1>
+      <p className="text-zinc-700">This lives at <strong>/marketing</strong>…</p>
+      <Link href="/" className="underline">Back to site</Link>
+    </section>
   );
 }
