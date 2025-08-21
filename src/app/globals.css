@@ -1,11 +1,77 @@
 @import "tailwindcss";
 
-/* tailwind v4 tokens */
+/* brand + “robots rail” palette */
 @theme {
-  --color-indigoBrand: #2f295c;
-  --color-aquaBrand:   #30d5d1;
-  --color-pinkBrand:   #ec326c;
+  --color-indigoBrand: #2f295c; /* your existing main */
+  --color-aquaBrand:   #30d5d1; /* neon teal */
+  --color-pinkBrand:   #ec326c; /* accent pink */
+
+  --color-brass: #c9a227;
+  --color-steel: #6b7280;   /* zinc-500-ish */
+  --color-sky:   #f3f7ff;
 }
 
-/* font helpers */
-code, pre, kbd, samp { font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+/* --- animations --- */
+@keyframes float-slow { from { transform: translateY(0) } to { transform: translateY(-6px) } }
+@keyframes drift-left { from { transform: translateX(0) } to { transform: translateX(-1200px) } }
+@keyframes pulse-rail { 0%,100% { opacity: .35 } 50% { opacity: 1 } }
+
+/* utility classes */
+.rail-gradient { background: linear-gradient(90deg, var(--color-aquaBrand) 0%, var(--color-pinkBrand) 100%); }
+.skypaper { background: radial-gradient(1200px 600px at 50% -200px, var(--color-sky) 0%, #ffffff 60%); }
+
+/* “ticket” edge effect using masks (no images) */
+.ticket {
+  position: relative;
+  border: 1px solid theme(colors.zinc.200);
+  border-radius: 1rem;
+  background: white;
+}
+.ticket:before,
+.ticket:after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; width: 16px;
+  background:
+    radial-gradient(8px 8px at 50% 8px, transparent 7px, black 8px) repeat-y;
+  -webkit-mask:
+    radial-gradient(8px 8px at 50% 8px, #000 7px, transparent 8px) repeat-y;
+  mask:
+    radial-gradient(8px 8px at 50% 8px, #000 7px, transparent 8px) repeat-y;
+  background-size: 16px 24px;
+}
+.ticket:before { left: -1px; }
+.ticket:after  { right: -1px; transform: scaleX(-1); }
+
+/* cloud rows (parallax) */
+.cloud-row {
+  pointer-events: none;
+  position: absolute; inset: 0; overflow: hidden;
+}
+.clouds {
+  position: absolute; inset: auto 0 10% 0; height: 140px;
+  background:
+    radial-gradient(40px 40px at 60px 40px, rgba(0,0,0,.06), transparent 60%),
+    radial-gradient(28px 28px at 160px 60px, rgba(0,0,0,.05), transparent 60%),
+    radial-gradient(50px 50px at 280px 50px, rgba(0,0,0,.08), transparent 60%),
+    radial-gradient(36px 36px at 380px 70px, rgba(0,0,0,.05), transparent 60%),
+    radial-gradient(44px 44px at 520px 40px, rgba(0,0,0,.06), transparent 60%),
+    radial-gradient(50px 50px at 680px 65px, rgba(0,0,0,.06), transparent 60%);
+  background-repeat: repeat-x;
+  background-size: 720px 120px;
+  animation: drift-left 40s linear infinite;
+  opacity: .45;
+  filter: blur(0.3px);
+}
+
+/* tiny gear “sparks” under the rail */
+.spark {
+  width: 6px; height: 6px; border-radius: 9999px; background: var(--color-brass);
+  box-shadow:
+    16px 4px 0 0 rgba(201,162,39,.7),
+    32px -4px 0 0 rgba(201,162,39,.45);
+  animation: float-slow 2.5s ease-in-out infinite alternate;
+}
+
+html, body { height: 100%; }
+body { color: #0b0b0b; }
