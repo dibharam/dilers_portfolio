@@ -1,36 +1,30 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import NameIntro from "@/components/intro/NameIntro";
 import CurvedRailNav from "@/components/rails/CurvedRailNav";
 
 /**
  * Behavior:
- * - If URL has ?skipIntro=1 -> DO NOT show intro
+ * - If page prop skipIntro===true -> DO NOT show intro
  * - Otherwise -> show intro (default for plain "/")
- * - No localStorage: the URL alone controls it.
+ * - No localStorage needed; URL controls it.
  */
 export default function HomeClient({
   profile = { name: "", tagline: "", bio: "" },
+  skipIntro = false,
 }) {
-  const router = useRouter();
-  const params = useSearchParams();
-
+  // Decide after mount to avoid any SSR mismatch flicker
   const [ready, setReady] = useState(false);
   const [showIntro, setShowIntro] = useState(false);
 
   useEffect(() => {
-    const skip = params.get("skipIntro") === "1";
-    setShowIntro(!skip);    // play intro unless explicitly skipped
+    setShowIntro(!skipIntro);
     setReady(true);
-  }, [params]);
+  }, [skipIntro]);
 
-  const handleIntroDone = () => {
-    // After the intro ends on "/", we simply hide it.
-    setShowIntro(false);
-  };
+  const handleIntroDone = () => setShowIntro(false);
 
   if (!ready) return null;
 

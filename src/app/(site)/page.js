@@ -6,6 +6,7 @@ export const metadata = {
   description: profile.tagline,
 };
 
-export default function HomePage() {
-  return <HomeClient profile={profile} />;
+export default function HomePage({ searchParams }) {
+  const skipIntro = searchParams?.skipIntro === "1";
+  return <HomeClient profile={profile} skipIntro={skipIntro} />;
 }
