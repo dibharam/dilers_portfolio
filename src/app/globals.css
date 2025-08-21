@@ -27,8 +27,12 @@
   border-radius: 1rem;
   background: white;
 }
-.ticket:before,
-.ticket:after {
+/* prevent decorative edges from capturing clicks */
+.ticket::before,
+.ticket::after { pointer-events: none; }
+
+.ticket::before,
+.ticket::after {
   content: "";
   position: absolute;
   top: 0; bottom: 0; width: 16px;
@@ -40,15 +44,17 @@
     radial-gradient(8px 8px at 50% 8px, #000 7px, transparent 8px) repeat-y;
   background-size: 16px 24px;
 }
-.ticket:before { left: -1px; }
-.ticket:after  { right: -1px; transform: scaleX(-1); }
+.ticket::before { left: -1px; }
+.ticket::after  { right: -1px; transform: scaleX(-1); }
 
 /* cloud rows (parallax) */
 .cloud-row {
   pointer-events: none;
   position: absolute; inset: 0; overflow: hidden;
 }
+/* also disable pointer events on the moving cloud layer */
 .clouds {
+  pointer-events: none;
   position: absolute; inset: auto 0 10% 0; height: 140px;
   background:
     radial-gradient(40px 40px at 60px 40px, rgba(0,0,0,.06), transparent 60%),
@@ -75,3 +81,39 @@
 
 html, body { height: 100%; }
 body { color: #0b0b0b; }
+/* wheels spin & piston pulse */
+@keyframes wheels { to { transform: rotate(360deg); } }
+@keyframes piston { 0%,100% { transform: translateX(0) } 50% { transform: translateX(3px) } }
+@keyframes sparks { 0% { opacity:.7; transform: translateY(0) } 100% { opacity:0; transform: translateY(-8px) } }
+@keyframes gear-slow { to { transform: rotate(360deg); } }
+@keyframes gear-rev  { to { transform: rotate(-360deg); } }
+@keyframes fadeSlideIn { from { opacity:0; transform: translateY(6px) } to { opacity:1; transform:none } }
+.animate-in { animation: fadeSlideIn .28s ease-out both; }
+
+.animate-wheels { animation: wheels 1.2s linear infinite; }
+.animate-piston { animation: piston 1.2s ease-in-out infinite; }
+.animate-sparks { animation: sparks .8s ease-in-out infinite alternate; }
+.animate-gear-slow { animation: gear-slow 40s linear infinite; }
+.animate-gear-rev  { animation: gear-rev  30s linear infinite; }
+/* smoother travel */
+.duration-600 { transition-duration: 600ms; }
+
+/* gentle vertical bob while idle/moving */
+@keyframes bob {
+  0%, 100% { transform: translateY(0) }
+  50%      { transform: translateY(-2px) }
+}
+.animate-bob { animation: bob 1.8s ease-in-out infinite; }
+
+/* small steam drift */
+@keyframes puff {
+  0%   { opacity: .7; transform: translateY(0) scale(1); }
+  100% { opacity: 0;  transform: translateY(-10px) scale(1.2); }
+}
+.steam > circle { animation: puff 1.4s ease-out infinite; }
+.steam > circle:nth-child(2) { animation-delay: .4s; }
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-bob, .steam > circle { animation: none !important; }
+}
