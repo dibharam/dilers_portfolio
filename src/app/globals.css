@@ -1,8 +1,10 @@
 @import "tailwindcss";
 
-/* brand + “robots rail” palette */
+/* =========================================================
+   THEME (Tailwind v4 @theme variables)
+   ========================================================= */
 @theme {
-  --color-indigoBrand: #2f295c; /* your existing main */
+  --color-indigoBrand: #2f295c; /* main */
   --color-aquaBrand:   #30d5d1; /* neon teal */
   --color-pinkBrand:   #ec326c; /* accent pink */
 
@@ -11,28 +13,61 @@
   --color-sky:   #f3f7ff;
 }
 
-/* --- animations --- */
-@keyframes float-slow { from { transform: translateY(0) } to { transform: translateY(-6px) } }
-@keyframes drift-left { from { transform: translateX(0) } to { transform: translateX(-1200px) } }
-@keyframes pulse-rail { 0%,100% { opacity: .35 } 50% { opacity: 1 } }
+/* Base */
+html, body { height: 100%; }
+body { color: #0b0b0b; }
 
-/* utility classes */
-.rail-gradient { background: linear-gradient(90deg, var(--color-aquaBrand) 0%, var(--color-pinkBrand) 100%); }
-.skypaper { background: radial-gradient(1200px 600px at 50% -200px, var(--color-sky) 0%, #ffffff 60%); }
+/* =========================================================
+   UTILITIES: Backgrounds & Surface Treatments
+   ========================================================= */
 
-/* “ticket” edge effect using masks (no images) */
+/* Brand beam (used at top edges, etc.) */
+.rail-gradient {
+  background: linear-gradient(90deg, var(--color-aquaBrand) 0%, var(--color-pinkBrand) 100%);
+}
+
+/* Soft “paper sky” radial for hero scenes */
+.skypaper {
+  background: radial-gradient(1200px 600px at 50% -200px, var(--color-sky) 0%, #ffffff 60%);
+}
+
+/* Subtle animated gradient mesh (brand‑tinted) */
+.bg-mesh {
+  background:
+    radial-gradient(900px 600px at 20% 30%, color-mix(in oklab, var(--color-aquaBrand) 18%, transparent), transparent 60%),
+    radial-gradient(800px 500px at 80% 70%, color-mix(in oklab, var(--color-pinkBrand) 14%, transparent), transparent 60%),
+    radial-gradient(1000px 700px at 60% 0%, color-mix(in oklab, var(--color-indigoBrand) 12%, transparent), transparent 60%);
+  background-repeat: no-repeat;
+  background-blend-mode: screen;
+}
+@keyframes meshShift {
+  0%   { background-position:   0%   0%,   0%   0%,   0%   0%; }
+  100% { background-position:   6%   4%,  -5%   7%,   4%  -3%; }
+}
+.animate-mesh { animation: meshShift 14s ease-in-out infinite alternate; }
+
+/* Faint geometric grid (masked at edges) */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+  -webkit-mask-image: radial-gradient(1200px 600px at 50% -200px, #000 55%, transparent 95%);
+          mask-image: radial-gradient(1200px 600px at 50% -200px, #000 55%, transparent 95%);
+}
+
+/* =========================================================
+   COMPONENT: “Ticket” Cards (mask cut edges)
+   ========================================================= */
 .ticket {
   position: relative;
   border: 1px solid theme(colors.zinc.200);
   border-radius: 1rem;
   background: white;
 }
-/* prevent decorative edges from capturing clicks */
-.ticket::before,
-.ticket::after { pointer-events: none; }
-
 .ticket::before,
 .ticket::after {
+  pointer-events: none; /* decorative, don’t block clicks */
   content: "";
   position: absolute;
   top: 0; bottom: 0; width: 16px;
@@ -47,12 +82,13 @@
 .ticket::before { left: -1px; }
 .ticket::after  { right: -1px; transform: scaleX(-1); }
 
-/* cloud rows (parallax) */
+/* =========================================================
+   DECOR: Parallax Clouds & Sparks
+   ========================================================= */
 .cloud-row {
   pointer-events: none;
   position: absolute; inset: 0; overflow: hidden;
 }
-/* also disable pointer events on the moving cloud layer */
 .clouds {
   pointer-events: none;
   position: absolute; inset: auto 0 10% 0; height: 140px;
@@ -70,50 +106,93 @@
   filter: blur(0.3px);
 }
 
-/* tiny gear “sparks” under the rail */
+/* tiny gear “sparks” */
 .spark {
   width: 6px; height: 6px; border-radius: 9999px; background: var(--color-brass);
   box-shadow:
-    16px 4px 0 0 rgba(201,162,39,.7),
+    16px  4px 0 0 rgba(201,162,39,.7),
     32px -4px 0 0 rgba(201,162,39,.45);
   animation: float-slow 2.5s ease-in-out infinite alternate;
 }
 
-html, body { height: 100%; }
-body { color: #0b0b0b; }
-/* wheels spin & piston pulse */
+/* =========================================================
+   ANIMATIONS: Motion Primitives
+   ========================================================= */
+@keyframes float-slow { from { transform: translateY(0) } to { transform: translateY(-6px) } }
+@keyframes drift-left { from { transform: translateX(0) } to { transform: translateX(-1200px) } }
+@keyframes pulse-rail { 0%,100% { opacity: .35 } 50% { opacity: 1 } }
+
 @keyframes wheels { to { transform: rotate(360deg); } }
 @keyframes piston { 0%,100% { transform: translateX(0) } 50% { transform: translateX(3px) } }
-@keyframes sparks { 0% { opacity:.7; transform: translateY(0) } 100% { opacity:0; transform: translateY(-8px) } }
+@keyframes sparkRise { 0% { opacity:.7; transform: translateY(0) } 100% { opacity:0; transform: translateY(-8px) } }
 @keyframes gear-slow { to { transform: rotate(360deg); } }
 @keyframes gear-rev  { to { transform: rotate(-360deg); } }
-@keyframes fadeSlideIn { from { opacity:0; transform: translateY(6px) } to { opacity:1; transform:none } }
-.animate-in { animation: fadeSlideIn .28s ease-out both; }
 
+@keyframes bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-2px) } }
+@keyframes puff { 0% { opacity: .7; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-10px) scale(1.2); } }
+
+@keyframes fadeSlideIn { from { opacity:0; transform: translateY(6px) } to { opacity:1; transform:none } }
+
+/* Helpers */
 .animate-wheels { animation: wheels 1.2s linear infinite; }
 .animate-piston { animation: piston 1.2s ease-in-out infinite; }
-.animate-sparks { animation: sparks .8s ease-in-out infinite alternate; }
+.animate-sparks { animation: sparkRise .8s ease-in-out infinite alternate; }
 .animate-gear-slow { animation: gear-slow 40s linear infinite; }
 .animate-gear-rev  { animation: gear-rev  30s linear infinite; }
-/* smoother travel */
-.duration-600 { transition-duration: 600ms; }
-
-/* gentle vertical bob while idle/moving */
-@keyframes bob {
-  0%, 100% { transform: translateY(0) }
-  50%      { transform: translateY(-2px) }
-}
 .animate-bob { animation: bob 1.8s ease-in-out infinite; }
-
-/* small steam drift */
-@keyframes puff {
-  0%   { opacity: .7; transform: translateY(0) scale(1); }
-  100% { opacity: 0;  transform: translateY(-10px) scale(1.2); }
-}
 .steam > circle { animation: puff 1.4s ease-out infinite; }
 .steam > circle:nth-child(2) { animation-delay: .4s; }
+.animate-in { animation: fadeSlideIn .28s ease-out both; }
+.duration-600 { transition-duration: 600ms; }
 
-/* respect reduced motion */
+/* =========================================================
+   INTRO: Name screen (modern, minimal)
+   ========================================================= */
+@keyframes introPop {
+  0% { opacity: 0; transform: translateY(6px) scale(.98); filter: blur(2px); }
+  100% { opacity: 1; transform: none; filter: none; }
+}
+@keyframes introPopSm {
+  0% { opacity: 0; transform: translateY(4px) scale(.8); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes introFade {
+  0% { opacity: 0; transform: translateY(4px); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes sheen {
+  0% { opacity: .35; } 50% { opacity: .9; } 100% { opacity: .35; }
+}
+
+.animate-intro-pop    { animation: introPop   .7s cubic-bezier(.2,.9,.2,1) both; }
+.animate-intro-pop-sm { animation: introPopSm .6s cubic-bezier(.2,.9,.2,1) both; }
+.animate-intro-fade   { animation: introFade  .8s .1s ease-out both; }
+.animate-intro-sheen  { animation: sheen 2.2s ease-in-out infinite; }
+
+/* =========================================================
+   SAFETY & ACCESSIBILITY
+   ========================================================= */
+
+/* Decorative layers never intercept clicks */
+.ticket::before,
+.ticket::after,
+.cloud-row,
+.clouds { pointer-events: none; }
+
+/* Respect reduced motion — disable non-essential animations */
 @media (prefers-reduced-motion: reduce) {
-  .animate-bob, .steam > circle { animation: none !important; }
+  .animate-mesh,
+  .animate-intro-pop,
+  .animate-intro-pop-sm,
+  .animate-intro-fade,
+  .animate-intro-sheen,
+  .animate-bob,
+  .animate-wheels,
+  .animate-piston,
+  .animate-sparks,
+  .animate-gear-slow,
+  .animate-gear-rev,
+  .steam > circle {
+    animation: none !important;
+  }
 }

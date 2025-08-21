@@ -1,19 +1,13 @@
-
+// src/app/(site)/layout.js
+import "../globals.css"; // keep your updated globals
 import SiteShell from "@/components/layout/SiteShell";
-import RailScene from "@/components/rails/RailScene"; // (or keep ParallaxScene if you didn’t rename)
-import TrainNav from "@/components/rails/TrainNav";
+import ParallaxScene from "@/components/rails/ParallaxScene"; // or your RailScene if you swapped
 
 export default function SiteLayout({ children }) {
   return (
     <div className="relative min-h-screen">
-      <RailScene />
-      <SiteShell>
-        {/* Train sits UNDER the header, ABOVE the content */}
-        <div className="mx-auto max-w-5xl px-4">
-          <TrainNav />
-        </div>
-        {children}
-      </SiteShell>
+      <ParallaxScene />
+      <SiteShell>{children}</SiteShell>
     </div>
   );
 }
