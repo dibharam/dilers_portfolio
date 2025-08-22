@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
  *   .animate-intro-pop, .animate-intro-pop-sm, .animate-intro-fade, .animate-intro-sheen
  * - Sits slightly higher on screen (pt-[18vh]).
  */
-export default function NameIntro({ onDone, duration = 4800 }) {
+export default function NameIntro({ onDone, duration = 3000 }) {
   const [visible, setVisible] = useState(true);
   const [fading, setFading] = useState(false);
 

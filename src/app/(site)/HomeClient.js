@@ -42,12 +42,10 @@ export default function HomeClient({
               View projects
             </Link>
             <Link href="/contact" className="inline-block rounded-xl px-4 py-2 border">
-              Contact
+              Contact Me
             </Link>
           </div>
-        </div>
-
-        <CurvedRailNav />
+        </div>  
       </section>
     </>
   );
