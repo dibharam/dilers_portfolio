@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import NameIntro from "@/components/intro/NameIntro";
-import CurvedRailNav from "@/components/rails/CurvedRailNav";
 
 /**
  * Behavior:

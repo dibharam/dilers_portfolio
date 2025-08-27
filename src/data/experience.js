@@ -10,7 +10,7 @@ const experience = [
       "Built backend pieces using Node.js/FastAPI and PostgreSQL for Smart Escrow and AI Due Diligence.",
       "Integrated Polygon for secure automated transactions and GPT-4o for real-time risk assessment.",
     ],
-    tech: ["Next.js", "React", "Node.js", "FastAPI", "PostgreSQL", "Polygon", "OpenAI"],
+    tech: ["Next.js", "React", "Node.js", "PostgreSQL", "Prisma", "Polygon", "OpenAI"],
   },
   {
     company: "Creator — di.bhar",

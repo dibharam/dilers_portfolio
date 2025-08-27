@@ -12,7 +12,7 @@ const projects = [
       "Backend in Node.js & Prisma with PostgreSQL",
       "Blockchain-backed Smart Escrow on Polygon; GPT-4o-driven risk checks",
     ],
-    tech: ["Next.js", "React", "Node.js", "FastAPI", "PostgreSQL", "Polygon", "OpenAI"],
+    tech: ["Next.js", "React", "Node.js", "PostgreSQL", "Docker", "Prisma"],
     links: {
       // add real links when available
       repo: null,
@@ -31,7 +31,7 @@ const projects = [
       "Full-stack: React/Next.js UI, FastAPI backend, PostgreSQL storage",
       "Focus on clean UX, auth, and progress tracking",
     ],
-    tech: ["Next.js", "React", "FastAPI", "PostgreSQL"],
+    tech: ["Next.js", "Typescript", "NodeJs", "PostgreSQL", "Docker", "Prisma", "postgreSQL"],
     links: { repo: null, live: null },
     cover: "/images/projects/kaiserai-cover.jpg",
   },

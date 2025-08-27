@@ -1,0 +1,131 @@
+:root {
+  --rail-bg: #000;           /* black rail */
+  --rail-bg-hover: #111;     /* hover bg */
+  --text: #f9fafb;           /* near-white */
+  --muted: #9ca3af;          /* icon default */
+  --active-bg: #1a1a1a;      /* dark gray active background */
+  --active-accent: #facc15;  /* yellow strip */
+}
+
+/* Fixed sidebar rail */
+.rail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 72px; /* slim default */
+  background: var(--rail-bg);
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #0b0b0b;
+  z-index: 60;
+  transition: width 180ms ease;
+}
+
+/* expand only on hover for pointer devices */
+@media (hover: hover) and (pointer: fine) {
+  .rail:hover {
+    width: 220px;
+  }
+}
+
+/* Brand (logo + text) */
+.brand {
+  display: grid;
+  grid-template-columns: 40px;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 12px 4px; /* minimal bottom padding */
+  color: var(--text);
+  text-decoration: none;
+}
+.logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  color: #fff;
+  background: linear-gradient(135deg, #34d399, #3b82f6);
+}
+.brandText {
+  display: none;
+  white-space: nowrap;
+  font-weight: 700;
+}
+@media (hover: hover) and (pointer: fine) {
+  .rail:hover .brand {
+    grid-template-columns: 40px 1fr;
+  }
+  .rail:hover .brandText {
+    display: block;
+  }
+}
+
+/* Nav (icons directly under brand) */
+.nav {
+  display: flex;
+  flex-direction: column;
+  padding: 0 6px; /* no top padding */
+  margin-top: 4px; /* small gap under logo */
+}
+
+/* Nav items */
+.item {
+  display: grid;
+  grid-template-columns: 40px;
+  justify-items: center;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 8px;
+  margin: 2px 0; /* tight vertical spacing */
+  border-radius: 12px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: background 160ms ease, color 160ms ease, border-left 160ms ease;
+  border-left: 4px solid transparent;
+  overflow: hidden; /* keep inside the rail */
+}
+.item:hover {
+  background: var(--rail-bg-hover);
+  color: var(--text);
+}
+.icon {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+.label {
+  display: none;
+  white-space: nowrap;
+  color: var(--text);
+}
+
+/* Show labels only when sidebar expands */
+@media (hover: hover) and (pointer: fine) {
+  .rail:hover .item {
+    grid-template-columns: 40px 1fr;
+    justify-items: start;
+  }
+  .rail:hover .label {
+    display: block;
+  }
+}
+
+/* Active item highlight */
+.active {
+  background: var(--active-bg);
+  color: var(--text);
+  border-left-color: var(--active-accent);
+}
+
+/* Social icons pinned to bottom */
+.socials {
+  margin-top: auto;
+  padding: 10px 6px 14px;
+  border-top: 1px solid #0b0b0b;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}

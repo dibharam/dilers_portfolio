@@ -70,7 +70,7 @@ export default function NameIntro({ onDone, duration = 3000 }) {
 
         {/* Tagline */}
         <p className="mt-3 text-sm sm:text-base text-zinc-600 animate-intro-fade">
-          Frontend Engineer · Next.js · React Native
+          Full Stack Engineer · Next.js · React Native · NodeJS · PostgreSQL
         </p>
 
         {/* Elegant underline accent */}

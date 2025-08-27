@@ -82,68 +82,7 @@ body { color: #0b0b0b; }
 .ticket::before { left: -1px; }
 .ticket::after  { right: -1px; transform: scaleX(-1); }
 
-/* =========================================================
-   DECOR: Parallax Clouds & Sparks
-   ========================================================= */
-.cloud-row {
-  pointer-events: none;
-  position: absolute; inset: 0; overflow: hidden;
-}
-.clouds {
-  pointer-events: none;
-  position: absolute; inset: auto 0 10% 0; height: 140px;
-  background:
-    radial-gradient(40px 40px at 60px 40px, rgba(0,0,0,.06), transparent 60%),
-    radial-gradient(28px 28px at 160px 60px, rgba(0,0,0,.05), transparent 60%),
-    radial-gradient(50px 50px at 280px 50px, rgba(0,0,0,.08), transparent 60%),
-    radial-gradient(36px 36px at 380px 70px, rgba(0,0,0,.05), transparent 60%),
-    radial-gradient(44px 44px at 520px 40px, rgba(0,0,0,.06), transparent 60%),
-    radial-gradient(50px 50px at 680px 65px, rgba(0,0,0,.06), transparent 60%);
-  background-repeat: repeat-x;
-  background-size: 720px 120px;
-  animation: drift-left 40s linear infinite;
-  opacity: .45;
-  filter: blur(0.3px);
-}
 
-/* tiny gear “sparks” */
-.spark {
-  width: 6px; height: 6px; border-radius: 9999px; background: var(--color-brass);
-  box-shadow:
-    16px  4px 0 0 rgba(201,162,39,.7),
-    32px -4px 0 0 rgba(201,162,39,.45);
-  animation: float-slow 2.5s ease-in-out infinite alternate;
-}
-
-/* =========================================================
-   ANIMATIONS: Motion Primitives
-   ========================================================= */
-@keyframes float-slow { from { transform: translateY(0) } to { transform: translateY(-6px) } }
-@keyframes drift-left { from { transform: translateX(0) } to { transform: translateX(-1200px) } }
-@keyframes pulse-rail { 0%,100% { opacity: .35 } 50% { opacity: 1 } }
-
-@keyframes wheels { to { transform: rotate(360deg); } }
-@keyframes piston { 0%,100% { transform: translateX(0) } 50% { transform: translateX(3px) } }
-@keyframes sparkRise { 0% { opacity:.7; transform: translateY(0) } 100% { opacity:0; transform: translateY(-8px) } }
-@keyframes gear-slow { to { transform: rotate(360deg); } }
-@keyframes gear-rev  { to { transform: rotate(-360deg); } }
-
-@keyframes bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-2px) } }
-@keyframes puff { 0% { opacity: .7; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-10px) scale(1.2); } }
-
-@keyframes fadeSlideIn { from { opacity:0; transform: translateY(6px) } to { opacity:1; transform:none } }
-
-/* Helpers */
-.animate-wheels { animation: wheels 1.2s linear infinite; }
-.animate-piston { animation: piston 1.2s ease-in-out infinite; }
-.animate-sparks { animation: sparkRise .8s ease-in-out infinite alternate; }
-.animate-gear-slow { animation: gear-slow 40s linear infinite; }
-.animate-gear-rev  { animation: gear-rev  30s linear infinite; }
-.animate-bob { animation: bob 1.8s ease-in-out infinite; }
-.steam > circle { animation: puff 1.4s ease-out infinite; }
-.steam > circle:nth-child(2) { animation-delay: .4s; }
-.animate-in { animation: fadeSlideIn .28s ease-out both; }
-.duration-600 { transition-duration: 600ms; }
 
 /* =========================================================
    INTRO: Name screen (modern, minimal)
